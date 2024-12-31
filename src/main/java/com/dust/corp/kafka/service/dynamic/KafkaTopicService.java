@@ -1,4 +1,4 @@
-package com.dust.corp.kafka;
+package com.dust.corp.kafka.service.dynamic;
 
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.NewTopic;

@@ -1,4 +1,4 @@
-package com.dust.corp.kafka;
+package com.dust.corp.kafka.service.dynamic;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;

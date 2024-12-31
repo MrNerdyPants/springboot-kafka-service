@@ -1,4 +1,4 @@
-package com.dust.corp.kafka;
+package com.dust.corp.kafka.service.standard;
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;

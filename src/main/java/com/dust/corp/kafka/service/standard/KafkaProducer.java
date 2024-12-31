@@ -1,4 +1,4 @@
-package com.dust.corp.kafka;
+package com.dust.corp.kafka.service.standard;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
