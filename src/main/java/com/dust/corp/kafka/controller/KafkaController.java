@@ -1,10 +1,11 @@
 package com.dust.corp.kafka.controller;
 
-import com.dust.corp.kafka.sample.KafkaSyncService;
+import com.dust.corp.kafka.sample.service.KafkaSyncService;
 import com.dust.corp.kafka.service.dynamic.DynamicKafkaConsumer;
 import com.dust.corp.kafka.service.dynamic.DynamicKafkaProducer;
 import com.dust.corp.kafka.service.dynamic.KafkaTopicService;
 import com.dust.corp.kafka.service.standard.KafkaProducer;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,7 +57,7 @@ public class KafkaController {
     }
 
     @GetMapping("/start")
-    public ResponseEntity<?> startProcess() throws InterruptedException {
+    public ResponseEntity<?> startProcess() throws InterruptedException, JsonProcessingException {
         kafkaSyncService.startProcess();
         return ResponseEntity.ok().build();
     }

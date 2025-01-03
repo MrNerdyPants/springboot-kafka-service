@@ -45,12 +45,7 @@ public class KafkaSyncConsumer2 {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-//                    if (latchMap.containsKey(correlationId)) {
-//                        responseMap.put(correlationId, response); // Save the response
-//                        latchMap.get(correlationId).countDown(); // Notify the waiting producer
-//                    } else {
-//                        System.err.println("No producer is waiting for Correlation ID: " + correlationId);
-//                    }
+
                 }
             }
         }).start();

@@ -3,6 +3,21 @@ server:
 spring:
   application:
     name: kafka-service
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/kafka_poc"
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      show-sql: true
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format:-sql: true
+
+
   kafka:
     bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
 

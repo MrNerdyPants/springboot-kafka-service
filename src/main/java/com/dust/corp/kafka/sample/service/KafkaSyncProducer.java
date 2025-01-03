@@ -1,4 +1,4 @@
-package com.dust.corp.kafka.sample;
+package com.dust.corp.kafka.sample.service;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
