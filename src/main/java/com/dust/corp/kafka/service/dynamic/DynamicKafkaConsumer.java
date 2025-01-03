@@ -1,8 +1,11 @@
 package com.dust.corp.kafka.service.dynamic;
 
+import com.dust.corp.kafka.service.experiment.BackToBackService;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.kafka.listener.ContainerProperties;
@@ -18,6 +21,10 @@ public class DynamicKafkaConsumer {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
+    @Lazy
+    @Autowired
+    private BackToBackService backToBackService;
+
     public void subscribeToTopic(String topicName) {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
@@ -29,7 +36,13 @@ public class DynamicKafkaConsumer {
         ContainerProperties containerProps = new ContainerProperties(topicName);
 
         containerProps.setMessageListener((MessageListener<String, String>) message -> {
+            try {
+                backToBackService.backToBack(message.value());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("Received message: " + message);
+
         });
 
         ConcurrentMessageListenerContainer<String, String> container =
