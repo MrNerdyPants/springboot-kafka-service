@@ -1,5 +1,6 @@
 package com.dust.corp.kafka.controller;
 
+import com.dust.corp.kafka.sample.KafkaSyncService;
 import com.dust.corp.kafka.service.dynamic.DynamicKafkaConsumer;
 import com.dust.corp.kafka.service.dynamic.DynamicKafkaProducer;
 import com.dust.corp.kafka.service.dynamic.KafkaTopicService;
@@ -26,6 +27,9 @@ public class KafkaController {
     @Autowired
     private DynamicKafkaProducer dynamicProducer;
 
+    @Autowired
+    private KafkaSyncService kafkaSyncService;
+
     @GetMapping("/send")
     public String sendMessage(@RequestParam("message") String message) {
         kafkaProducer.sendMessage(message);
@@ -49,6 +53,12 @@ public class KafkaController {
         }
         dynamicConsumer.subscribeToTopic(topicName);
         return ResponseEntity.ok("Topic created and subscribed: " + topicName);
+    }
+
+    @GetMapping("/start")
+    public ResponseEntity<?> startProcess() throws InterruptedException {
+        kafkaSyncService.startProcess();
+        return ResponseEntity.ok().build();
     }
 
 }
